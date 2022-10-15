@@ -6,19 +6,20 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    autoHideMenuBar: true,
+    icon: path.join(__dirname, '../src/main.ico'),
     webPreferences: {
       // contextIsolation: false,
       preload: path.join(__dirname, 'preload.js')
     }
   })
-
+  console.log(path.join(__dirname, '../src/main.ico'))
+  
   if (app.isPackaged) {
     // 'build/index.html'
     win.loadURL(`file://${__dirname}/../index.html`);
   } else {
     win.loadURL('http://localhost:3000/index.html');
-
-    win.webContents.openDevTools();
 
     // Hot Reloading on 'node_modules/.bin/electronPath'
     require('electron-reload')(__dirname, {
